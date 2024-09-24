@@ -1,0 +1,31 @@
+BEGIN TRANSACTION;
+CREATE TABLE budgets (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            category TEXT UNIQUE,
+            amount REAL
+        );
+INSERT INTO "budgets" VALUES(1,'Food',1000.0);
+INSERT INTO "budgets" VALUES(5,'Rent',2000.0);
+CREATE TABLE transactions (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                user_id INTEGER,
+                type TEXT,
+                amount REAL,
+                category TEXT,
+                description TEXT,
+                date TEXT,
+                FOREIGN KEY (user_id) REFERENCES users (id)
+            );
+INSERT INTO "transactions" VALUES(1,3,'Income',0.0,'Income','','2024-09-10');
+CREATE TABLE users (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        username TEXT UNIQUE NOT NULL,
+        password_hash TEXT NOT NULL
+    );
+INSERT INTO "users" VALUES(1,'Bhavika_12',X'35141C68166222957890290B7E9664E16BDF09A91A1A16E7A49E5EAB84EA23012AAB53010D305664BD79B3A5C4F2451A');
+INSERT INTO "users" VALUES(2,'John_12',X'C580C3DD7662BE9D430C6B3348115908280FC98F36BAB9F90BC7B858CF2E45A52EE69D585308D419BF9DA7DDA2CD150F12E86C6243C7043450241720923E4BEF');
+DELETE FROM "sqlite_sequence";
+INSERT INTO "sqlite_sequence" VALUES('users',2);
+INSERT INTO "sqlite_sequence" VALUES('budgets',5);
+INSERT INTO "sqlite_sequence" VALUES('transactions',1);
+COMMIT;
